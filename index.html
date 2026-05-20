@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ТоМо — Фабрика торгового оборудования</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a2e;
+    --mid: #16213e;
+    --accent: #c8a96e;
+    --accent2: #e8c99e;
+    --light: #f5f0e8;
+    --text: #2d2d2d;
+    --gray: #888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    color: var(--text);
+    background: var(--light);
+  }
+
+  /* TOPBAR */
+  .topbar {
+    background: var(--dark);
+    color: #ccd;
+    font-size: 0.82rem;
+    padding: 8px 0;
+    letter-spacing: 0.04em;
+  }
+  .topbar .inner {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .topbar a { color: var(--accent); text-decoration: none; }
+  .topbar a:hover { color: var(--accent2); }
+
+  /* NAV */
+  nav {
+    background: var(--mid);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  nav .inner {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .logo span { color: #fff; font-size: 0.75rem; display: block; font-family: 'Raleway', sans-serif; letter-spacing: 0.15em; font-weight: 300; }
+  nav ul { list-style: none; display: flex; gap: 30px; }
+  nav ul a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    font-weight: 600;
+  }
+  nav ul a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('images/1page.jpg') center/cover no-repeat;
+    color: #fff;
+    padding: 110px 30px 90px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 60px,
+      rgba(200,169,110,0.03) 60px,
+      rgba(200,169,110,0.03) 61px
+    );
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    margin-bottom: 28px;
+    border-radius: 2px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.2;
+    margin-bottom: 18px;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero p {
+    color: #ccd;
+    font-size: 1.05rem;
+    max-width: 580px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    padding: 14px 32px;
+    border-radius: 2px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--accent); color: var(--dark); }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.3); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 70px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--accent);
+  }
+  .stat-label { font-size: 0.78rem; color: #aab; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+  /* SECTIONS */
+  section { padding: 90px 30px; }
+  .inner { max-width: 1100px; margin: auto; }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    color: var(--dark);
+    margin-bottom: 20px;
+    line-height: 1.25;
+  }
+  .section-sub {
+    color: #444;
+    font-size: 1rem;
+    max-width: 560px;
+    line-height: 1.75;
+    font-weight: 300;
+    margin-bottom: 50px;
+  }
+
+  /* ABOUT */
+  #about { background: #fff; }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+  }
+  .about-img {
+    border-radius: 4px;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+  }
+  .about-img::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 30px,
+      rgba(200,169,110,0.05) 30px, rgba(200,169,110,0.05) 31px
+    );
+  }
+  .about-img span { position: relative; z-index: 1; }
+  .about-text p {
+    color: #222;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 0.97rem;
+    font-weight: 300;
+  }
+  .about-features { display: flex; flex-direction: column; gap: 16px; margin-top: 30px; }
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--light);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+  }
+  .feature-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .feature-title { font-weight: 600; font-size: 0.9rem; color: var(--dark); margin-bottom: 2px; }
+  .feature-desc { font-size: 0.82rem; color: #333; font-weight: 300; }
+
+  /* SERVICES */
+  #service { background: var(--light); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .service-card {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .service-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+  .service-thumb {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+    background: #eee;
+  }
+  .service-name { font-size: 0.88rem; font-weight: 600; color: #111; line-height: 1.4; padding: 12px 14px; text-align: center; }
+
+  /* SUBMENU */
+  #submenu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 8000;
+    align-items: center;
+    justify-content: center;
+  }
+  #submenu-box {
+    background: var(--light);
+    border-radius: 8px;
+    padding: 36px;
+    max-width: 780px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  #submenu-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .submenu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+  .submenu-card {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .submenu-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  .submenu-card img { width: 100%; height: 100px; object-fit: cover; display: block; }
+  .submenu-card-name { font-size: 0.78rem; font-weight: 600; color: #111; padding: 8px 10px; text-align: center; line-height: 1.3; }
+  .submenu-close {
+    display: block;
+    margin: 24px auto 0;
+    background: var(--accent);
+    color: var(--dark);
+    border: none;
+    padding: 10px 28px;
+    border-radius: 2px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+
+  /* HOW IT WORKS */
+  #how { background: var(--dark); color: #fff; }
+  #how .section-title { color: #fff; }
+  #how .section-sub { color: #ccd; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 30px; margin-top: 50px; }
+  .step { text-align: center; }
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--dark);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+    font-weight: 700;
+  }
+  .step-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; color: #fff; }
+  .step-desc { font-size: 0.82rem; color: #ccd; line-height: 1.6; font-weight: 300; }
+
+  /* CONTACT */
+  #contact { background: #fff; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 24px; }
+  .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-item-icon {
+    width: 44px; height: 44px;
+    background: var(--light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    border: 2px solid var(--accent);
+  }
+  .contact-item-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #555; margin-bottom: 4px; }
+  .contact-item-value { font-weight: 600; color: var(--dark); font-size: 0.97rem; }
+  .contact-item-value a { color: var(--dark); text-decoration: none; }
+  .contact-item-value a:hover { color: var(--accent); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 14px 18px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    background: var(--light);
+    color: var(--text);
+    transition: border-color 0.3s;
+    outline: none;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--accent); }
+  .contact-form textarea { resize: vertical; min-height: 120px; }
+  .contact-form .btn { align-self: flex-start; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: #ccd;
+    padding: 40px 30px;
+    text-align: center;
+    font-size: 0.82rem;
+  }
+  footer .footer-inner { max-width: 1100px; margin: auto; }
+  footer .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  footer p { margin-bottom: 6px; line-height: 1.6; }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-img { height: 250px; }
+    nav ul { display: none; }
+    .hero { padding: 70px 20px 60px; }
+    .hero-stats { gap: 30px; }
+    section { padding: 60px 20px; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge, .hero h1, .hero p, .hero-actions {
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero h1 { animation-delay: 0.1s; }
+  .hero p { animation-delay: 0.2s; }
+  .hero-actions { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="inner">
+    <span>г. Тольятти, ул. Индустриальная 6, строение 2</span>
+    <span>
+      <a href="tel:+78482638490">+7 8482 63 84 90</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:oootomo@yandex.ru">oootomo@yandex.ru</a>
+    </span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <div class="logo">ТоМо <span>Фабрика торгового оборудования</span></div>
+    <ul>
+      <li><a href="#about" onclick="smoothScroll(event,'about')">О нас</a></li>
+      <li><a href="#service" onclick="smoothScroll(event,'service')">Услуги</a></li>
+      <li><a href="#how" onclick="smoothScroll(event,'how')">Как мы работаем</a></li>
+      <li><a href="#contact" onclick="smoothScroll(event,'contact')">Контакты</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Тольятти · Самара · 30 лет опыта</div>
+  <h1>Фабрика торгового<br>оборудования <em>«ТоМо»</em></h1>
+  <p>Изготовление и установка торгового оборудования любой сложности — от проектирования до монтажа</p>
+  <div class="hero-actions">
+    <a href="#contact" onclick="smoothScroll(event,'contact')" class="btn btn-primary">Заказать консультацию</a>
+    <a href="#service" onclick="smoothScroll(event,'service')" class="btn btn-outline">Наши услуги</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">30+</div>
+      <div class="stat-label">лет на рынке</div>
+    </div>
+    <div>
+      <div class="stat-num">500+</div>
+      <div class="stat-label">реализованных проектов</div>
+    </div>
+    <div>
+      <div class="stat-num">100%</div>
+      <div class="stat-label">собственное производство</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="images/2page.jpg" alt="Производственный цех" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">
+      </div>
+      <div class="about-text">
+        <div class="section-label">О компании</div>
+        <h2 class="section-title">Торговое оборудование от проектирования до монтажа</h2>
+        <p>Фирма «ТоМо» работает на рынке торгового оборудования более 30 лет. Мы изготавливаем качественное и недорогое торговое оборудование в Тольятти и Самаре.</p>
+        <p>Наша компания занимается изготовлением и установкой торгового оборудования, в том числе с применением торговых систем «Joker», «Uno», «Vertical», «Neo-Fix», «Global».</p>
+        <div class="about-features">
+          <div class="feature-item">
+            <div class="feature-icon">🏭</div>
+            <div>
+              <div class="feature-title">Собственное производство</div>
+              <div class="feature-desc">Полный станочный парк для производственного цикла любой сложности</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🚚</div>
+            <div>
+              <div class="feature-title">Доставка и установка</div>
+              <div class="feature-desc">Доставка по всей Самарской области, установка под ключ</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">⏱️</div>
+            <div>
+              <div class="feature-title">Сжатые сроки</div>
+              <div class="feature-desc">Индивидуальный подход и планирование для минимальных сроков сдачи</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="service">
+  <div class="inner">
+    <div class="section-label">Продукция</div>
+    <h2 class="section-title">Виды изготавливаемого оборудования</h2>
+    <p class="section-sub">Собственное производство позволяет нам реализовать любые, даже самые смелые пожелания наших заказчиков.</p>
+    <div class="services-grid">
+      <div class="service-card" onclick="openSubmenu()">
+        <img class="service-thumb" src="images/11 Vetements/1.jpg" alt="Торговые отделы">
+        <div class="service-name">Торговые отделы</div>
+      </div>
+      <div class="service-card" onclick="openGallery('1 Vitrine', 8)">
+        <img class="service-thumb" src="images/1 Vitrine/1.jpg" alt="Витрины">
+        <div class="service-name">Витрины</div>
+      </div>
+      <div class="service-card" onclick="openGallery('2 Prilavok', 9)">
+        <img class="service-thumb" src="images/2 Prilavok/1.jpg" alt="Прилавки">
+        <div class="service-name">Прилавки</div>
+      </div>
+      <div class="service-card" onclick="openGallery('3 Stellage', 4)">
+        <img class="service-thumb" src="images/3 Stellage/1.jpg" alt="Стеллажи">
+        <div class="service-name">Стеллажи</div>
+      </div>
+      <div class="service-card" onclick="openGallery('4 Peregorodki', 1)">
+        <img class="service-thumb" src="images/4 Peregorodki/1.jpg" alt="Перегородки">
+        <div class="service-name">Перегородки</div>
+      </div>
+      <div class="service-card" onclick="openGallery('5 bar', 22)">
+        <img class="service-thumb" src="images/5 bar/1.jpg" alt="Рецепции">
+        <div class="service-name">Рецепции и барные стойки</div>
+      </div>
+      <div class="service-card" onclick="openGallery('6 ostrov', 35)">
+        <img class="service-thumb" src="images/6 ostrov/1.jpg" alt="Островные отделы">
+        <div class="service-name">Островные отделы</div>
+      </div>
+      <div class="service-card" onclick="openGallery('7 coiffure', 3)">
+        <img class="service-thumb" src="images/7 coiffure/1.jpg" alt="Парикмахерская">
+        <div class="service-name">Парикмахерские</div>
+      </div>
+      <div class="service-card" onclick="openGallery('8 office + armoire', 13)">
+        <img class="service-thumb" src="images/8 office + armoire/1.jpg" alt="Офисная мебель">
+        <div class="service-name">Офисная мебель, шкафы</div>
+      </div>
+      <div class="service-card" onclick="openGallery('9 cuisines', 30)">
+        <img class="service-thumb" src="images/9 cuisines/1.jpg" alt="Кухни">
+        <div class="service-name">Кухни на заказ</div>
+      </div>
+      <div class="service-card" onclick="openGallery('10 verre', 3)">
+        <img class="service-thumb" src="images/10 verre/1.jpg" alt="Стекло">
+        <div class="service-name">Изделия из стекла</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBMENU ТОРГОВЫЕ ОТДЕЛЫ -->
+<div id="submenu-overlay" onclick="if(event.target===this)closeSubmenu()">
+  <div id="submenu-box">
+    <h3>Торговые отделы</h3>
+    <div class="submenu-grid">
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('11 Vetements', 21, true)">
+        <img src="images/11 Vetements/1.jpg" alt="">
+        <div class="submenu-card-name">Отдел верхней одежды</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('12 chaussures', 12, true)">
+        <img src="images/12 chaussures/1.jpg" alt="">
+        <div class="submenu-card-name">Обувь</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('15 sacs', 13, true)">
+        <img src="images/15 sacs/1.jpg" alt="">
+        <div class="submenu-card-name">Сумки</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('14 lunettes', 5, true)">
+        <img src="images/14 lunettes/1.jpg" alt="">
+        <div class="submenu-card-name">Очки</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('19 galanterie', 9, true)">
+        <img src="images/19 galanterie/1.jpg" alt="">
+        <div class="submenu-card-name">Галантерея</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('17 montre', 4, true)">
+        <img src="images/17 montre/1.jpg" alt="">
+        <div class="submenu-card-name">Часы</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('16 bijoux', 18, true)">
+        <img src="images/16 bijoux/1.jpg" alt="">
+        <div class="submenu-card-name">Ювелирные отделы</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('23 cosmetique', 15, true)">
+        <img src="images/23 cosmetique/1.jpg" alt="">
+        <div class="submenu-card-name">Косметика</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('18 souvenirs', 11, true)">
+        <img src="images/18 souvenirs/1.jpg" alt="">
+        <div class="submenu-card-name">Сувениры</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('13 chapka', 2, true)">
+        <img src="images/13 chapka/1.jpg" alt="">
+        <div class="submenu-card-name">Головные уборы</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('20 jouets', 3, true)">
+        <img src="images/20 jouets/1.jpg" alt="">
+        <div class="submenu-card-name">Игрушки</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('21 kanztovary', 3, true)">
+        <img src="images/21 kanztovary/1.jpg" alt="">
+        <div class="submenu-card-name">Канцтовары</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('24 pharmacie', 10, true)">
+        <img src="images/24 pharmacie/1.jpg" alt="">
+        <div class="submenu-card-name">Аптеки</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('25 alimentaire', 9, true)">
+        <img src="images/25 alimentaire/1.jpg" alt="">
+        <div class="submenu-card-name">Продовольственные товары</div>
+      </div>
+      <div class="submenu-card" onclick="closeSubmenu();openGallery('22 dvd', 5, true)">
+        <img src="images/22 dvd/1.jpg" alt="">
+        <div class="submenu-card-name">DVD-VIDEO отделы</div>
+      </div>
+    </div>
+    <button class="submenu-close" onclick="closeSubmenu()">Закрыть</button>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="inner">
+    <div class="section-label" style="color: var(--accent);">Процесс работы</div>
+    <h2 class="section-title">Как мы работаем</h2>
+    <p class="section-sub">От первого звонка до сдачи готового объекта — прозрачно и в срок.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Консультация</div>
+        <div class="step-desc">Позвоните или напишите нам — получите бесплатную консультацию специалиста</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Замер</div>
+        <div class="step-desc">Специалист выедет бесплатно, проведёт замеры и покажет образцы материалов</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Дизайн</div>
+        <div class="step-desc">Разработка чертежей и расчёт стоимости. Утверждение или корректировка проекта</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Изготовление</div>
+        <div class="step-desc">После предоплаты мебель запускается в производство на нашем собственном заводе</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-title">Сборка и установка</div>
+        <div class="step-desc">Профессиональная сборка, навеска и установка силами наших специалистов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Контакты</div>
+        <h2 class="section-title">Свяжитесь с нами</h2>
+        <p class="section-sub">Бесплатная консультация. Перезвоним в течение 2 часов в рабочее время.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Телефон</div>
+              <div class="contact-item-value"><a href="tel:+78482638490">+7 8482 63 84 90</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value"><a href="mailto:oootomo@yandex.ru">oootomo@yandex.ru</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div>
+              <div class="contact-item-label">Адрес</div>
+              <div class="contact-item-value">г. Тольятти, ул. Индустриальная 6, строение 2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form">
+          <input type="text" placeholder="Ваше имя">
+          <input type="tel" placeholder="Номер телефона">
+          <input type="email" placeholder="Email">
+          <textarea placeholder="Ваш вопрос или запрос..."></textarea>
+          <a href="mailto:oootomo@yandex.ru" class="btn btn-primary">Отправить заявку</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">ТоМо</div>
+    <p>Фабрика торгового оборудования</p>
+    <p>г. Тольятти, ул. Индустриальная 6, строение 2</p>
+    <p><a href="tel:+78482638490">+7 8482 63 84 90</a> · <a href="mailto:oootomo@yandex.ru">oootomo@yandex.ru</a></p>
+    <p style="margin-top:16px;">© 2024 ТоМо. Все права защищены.</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;align-items:center;justify-content:center;flex-direction:column;">
+  <span onclick="closeLightbox()" style="position:absolute;top:20px;right:30px;color:#fff;font-size:2rem;cursor:pointer;">✕</span>
+  <span onclick="changeImg(-1)" style="position:absolute;left:20px;color:#fff;font-size:5rem;cursor:pointer;user-select:none;padding:20px;">‹</span>
+  <img id="lightbox-img" src="" style="max-height:80vh;max-width:90vw;border-radius:4px;">
+  <span onclick="changeImg(1)" style="position:absolute;right:20px;color:#fff;font-size:5rem;cursor:pointer;user-select:none;padding:20px;">›</span>
+  <div id="lightbox-counter" style="color:#aaa;margin-top:14px;font-size:0.85rem;"></div>
+</div>
+
+</body>
+<script>
+function smoothScroll(e, id) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+let currentFolder = '';
+let currentIndex = 1;
+let totalImages = 0;
+
+let fromSubmenu = false;
+function openGallery(folder, total, submenu = false) {
+  fromSubmenu = submenu;
+  currentFolder = folder;
+  currentIndex = 1;
+  totalImages = total;
+  document.getElementById('lightbox').style.display = 'flex';
+  updateImg();
+}
+
+function updateImg() {
+  const img = document.getElementById('lightbox-img');
+  const base = 'images/' + currentFolder + '/' + currentIndex;
+  img.onerror = function() { img.src = base + '.jpeg'; img.onerror = null; };
+  img.src = base + '.jpg';
+  document.getElementById('lightbox-counter').textContent = currentIndex + ' / ' + totalImages;
+}
+
+function changeImg(dir) {
+  currentIndex = ((currentIndex - 1 + dir + totalImages) % totalImages) + 1;
+  updateImg();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+  if (fromSubmenu) openSubmenu();
+}
+
+function openSubmenu() {
+  document.getElementById('submenu-overlay').style.display = 'flex';
+}
+
+function closeSubmenu() {
+  document.getElementById('submenu-overlay').style.display = 'none';
+}
+
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+</script>
+</html>
